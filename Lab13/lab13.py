@@ -54,7 +54,6 @@ def a_star(m, start_pos, goal_pos):
     while len(openSet) != 0:
         min_value_node = Node()
         min_value_node.f_score = math.inf
-        # min_value = []
 
         for i in range(0, len(openSet),1):
             # min_value.append(openSet[i].f_score)
@@ -72,9 +71,9 @@ def a_star(m, start_pos, goal_pos):
             closedSet.append(min_value_node)
 
         adjacent_cells = adjacent(m, min_value_node.position)
-        # print(adjacent_cells)
+
+        #  check if node A is in the closedSet
         # for each neighbor node adjacent to node N
-            # check if node A is in the closedSet
         for k in range(0, len(adjacent_cells), 1):
             A = generate_node(adjacent_cells[k], goal_pos)
 
@@ -87,7 +86,6 @@ def a_star(m, start_pos, goal_pos):
                 temp_g_score = min_value_node.g_score + movement_cost(min_value_node.position, A.position)
 
                 if A not in openSet or temp_g_score < A.g_score:
-
                     A.parent = min_value_node
                     A.g_score = temp_g_score
                     A.f_score = A.g_score + calculate_manhattan_distance(A.position, goal_pos)
@@ -102,9 +100,6 @@ def a_star(m, start_pos, goal_pos):
 def path(parent, current):
 
     reconstructed_path = []
-
-    # if parent == current == (-1,-1):
-    #     return reconstructed_path.append((-1,-1))
 
     while not current.is_start_node:
         reconstructed_path.append(current.position)
